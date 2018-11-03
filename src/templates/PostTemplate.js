@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { graphql } from "gatsby";
 import Main from "../components/Main/";
 import { connect } from "react-redux";
 require("core-js/fn/array/find");

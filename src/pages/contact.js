@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import injectSheet from "react-jss";
-import Obfuscate from "react-obfuscate";
-
+import injectSheet, { ThemeProvider } from "react-jss";
+import Layout from "../components/layout";
 import Main from "../components/Main";
 import Article from "../components/Main/Article";
 import PageHeader from "../components/Page/PageHeader";
@@ -14,16 +13,18 @@ const styles = theme => ({});
 
 const Contact = () => {
   return (
-    <Main>
-      <Article>
-        <PageHeader title="Contact" />
-        <Content>
-          Feel free to contact me by email: <Obfuscate email={config.contactEmail} /> or use the
-          form below.
-        </Content>
-        <Form />
-      </Article>
-    </Main>
+    <Layout>
+      <Main>
+        <Article>
+          <PageHeader title="Contact" />
+          <Content>
+            Feel free to contact me by email: use the
+            form below.
+          </Content>
+          <Form />
+        </Article>
+      </Main>
+    </Layout>
   );
 };
 

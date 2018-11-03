@@ -1,13 +1,13 @@
-import { JssProvider } from "react-jss";
-import { Provider } from "react-redux";
-import { renderToString } from "react-dom/server";
-import React from "react";
+const { JssProvider, ThemeProvider } = require("react-jss");
+const { Provider } = require("react-redux");
+const { renderToString } = require("react-dom/server");
+const React = require("react");
 
 require("dotenv").config();
 
-import getPageContext from "./src/getPageContext";
-import createStore from "./src/state/store";
-import theme from "./src/styles/theme";
+const getPageContext = require("./src/getPageContext");
+const createStore = require("./src/state/store");
+const theme = require("./src/styles/theme");
 
 exports.replaceRenderer = ({ bodyComponent, replaceBodyHTMLString, setHeadComponents }) => {
   const pageContext = getPageContext();
@@ -16,14 +16,16 @@ exports.replaceRenderer = ({ bodyComponent, replaceBodyHTMLString, setHeadCompon
   replaceBodyHTMLString(
     renderToString(
       <Provider store={store}>
-        <JssProvider
-          registry={pageContext.sheetsRegistry}
-          generateClassName={pageContext.generateClassName}
-        >
-          {React.cloneElement(bodyComponent, {
-            pageContext
-          })}
-        </JssProvider>
+        <ThemeProvider theme={theme}>
+          <JssProvider
+            registry={pageContext.sheetsRegistry}
+            generateClassName={pageContext.generateClassName}
+          >
+            {React.cloneElement(bodyComponent, {
+              pageContext
+            })}
+          </JssProvider>
+        </ThemeProvider>
       </Provider>
     )
   );
@@ -50,7 +52,7 @@ exports.onRenderBody = ({ setPostBodyComponents }) => {
         __html: `
         WebFontConfig = {
           google: {
-            families: ["${theme.base.fonts.styledFamily}:${theme.base.fonts.styledFonts}"]
+            families: ["${theme.default.base.fonts.styledFamily}:${theme.default.base.fonts.styledFonts}"]
           }
         };
 
