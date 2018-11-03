@@ -152,6 +152,7 @@ const theme = createMuiTheme({
     }
   },
   typography: {
+    useNextVariants: true,
     fontFamily: `Arial, sans-serif`,
     fontSize: 16
   }
